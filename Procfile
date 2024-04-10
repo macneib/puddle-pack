@@ -1,3 +1,3 @@
-web: node index.js
-worker: node index.js
+web: node dist/index.js
+worker: node dist/index.js
 build: npm install
