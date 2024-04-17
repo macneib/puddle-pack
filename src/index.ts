@@ -1,16 +1,18 @@
 // @@@SNIPSTART typescript-hello-worker
 import { NativeConnection, Worker } from '@temporalio/worker';
 import * as activities from './activities';
+import {getConnectionOptions} from './temporal-connection';
 
 async function run() {
   // Step 1: Establish a connection with Temporal server.
   //
   // Worker code uses `@temporalio/worker.NativeConnection`.
   // (But in your application code it's `@temporalio/client.Connection`.)
-  const connection = await NativeConnection.connect({
-    address: 'localhost:7233',
-    // TLS and gRPC metadata configuration goes here.
-  });
+  const connection = await NativeConnection.connect(getConnectionOptions())
+  // const connection = await NativeConnection.connect({
+  //   address: 'localhost:7233',
+  //   // TLS and gRPC metadata configuration goes here.
+  // });
   // Step 2: Register Workflows and Activities with the Worker.
   const worker = await Worker.create({
     connection,
